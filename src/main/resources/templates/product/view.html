@@ -1,0 +1,300 @@
+<th:block th:include="@{product/_header.html}"/>
+<th:block th:include="@{product/_aside.html}"/>
+            <section class="view">
+                <nav>
+                    <h1>상품보기</h1>
+                    <p>
+                        HOME > 
+                        <span>[[${cates.c1Name}]]</span>
+                         > 
+                        <strong>[[${cates.c2Name}]]</strong>
+                    </p>
+                </nav>
+                <article class="info">
+                    <div class="image">
+                        <img src="https://via.placeholder.com/460" alt="product image">
+                    </div>
+                    <div class="summary">
+                        <nav>
+                            <h1>[[${product.seller}]]</h1>
+                            <h2>
+                                상품번호&nbsp;:&nbsp;
+                                <span>[[${product.prodNo}]]</span>
+                            </h2>
+                        </nav>
+                        <nav>
+                            <h3>[[${product.prodName}]]</h3>
+                            <p>[[${product.descript}]]</p>
+                            <th:block th:switch="${product.score}">
+                           		<h5 th:case="1" class="rating star1"><a href="#">상품평보기</a></h5>
+                           		<h5 th:case="2" class="rating star2"><a href="#">상품평보기</a></h5>
+                           		<h5 th:case="3" class="rating star3"><a href="#">상품평보기</a></h5>
+                           		<h5 th:case="4" class="rating star4"><a href="#">상품평보기</a></h5>
+                           		<h5 th:case="5" class="rating star5"><a href="#">상품평보기</a></h5>
+                           	</th:block>
+                        </nav>
+                        <nav>
+                            <div class="org_price">
+                                <del>[[${#numbers.formatInteger(product.price, 3, 'COMMA')}]]</del>
+                                <span>[[${product.discount}]]%</span>
+                            </div>
+                            <div class="dis_price">
+                                <ins>[[${#numbers.formatInteger(product.disPrice, 3, 'COMMA')}]]</ins>
+                            </div>
+                        </nav>
+                        <nav>
+                            <span th:class="${product.delivery == 0? 'view-free-delivery': 'view-delivery-fee'}">배송비 [[${#numbers.formatInteger(product.delivery, 3, 'COMMA')}]]원</span>
+                            <span class="arrival">[[${estimatedDeliveryInfo[2]}]]([[${estimatedDeliveryInfo[1]}]]) [[${estimatedDeliveryInfo[0]}]] 도착예정</span>
+                            <span class="desc">본 상품은 국내배송만 가능합니다.</span>
+                        </nav>
+                        <nav>
+                            <span class="card cardfree">
+                                <i>아이콘</i>
+                                무이자할부
+                            </span>
+                            &nbsp;&nbsp;
+                            <span class="card cardadd">
+                                <i>아이콘</i>
+                                카드추가혜택
+                            </span>
+                        </nav>
+                        <nav>
+                            <span class="origin">원산지-상세설명 참조</span>
+                        </nav>
+                        <nav></nav>
+                        <img th:src="@{/img/vip_plcc_banner.png}" alt="100원만 결제해도 1만원 적립 배너" class="banner">
+                        <div class="count">
+                            <button class="decrease" onclick="decrease()">-</button>
+                            <input type="text" name="num" value="1" readonly>
+                            <button class="increase" onclick="increase()">+</button>
+                        </div>
+                        <div class="total">
+                            <span></span>
+                            <em>총 상품금액</em>
+                        </div>
+                        <div class="button">
+                            <button class="cart" onclick="cart()">장바구니</button>
+                            <button class="order" onclick="singlePurchase()">구매하기</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="detail">
+                    <nav>
+                        <h1>상품정보</h1>
+                    </nav>
+                    <img src="https://via.placeholder.com/860x460" alt="상세페이지1">
+                    <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
+                    <img src="https://via.placeholder.com/860x460" alt="상세페이지3">
+                </article>
+                <article class="notice">
+                    <nav>
+                        <h1>상품 정보 제공 공시</h1>
+                        <p>[전자상거래에 관한 상품정보 제공에 관한 고시] 항목에 의거 등록된 정보입니다.</p>
+                    </nav>
+                    <table>
+                        <tr>
+                            <td>상품번호</td>
+                            <td>[[${product.prodNo}]]</td>
+                        </tr>
+                        <tr>
+                            <td>상품상태</td>
+                            <td>[[${product.status}]]</td>
+                        </tr>
+                        <tr>
+                            <td>부가세 면세여부</td>
+                            <td>[[${product.duty}]]</td>
+                        </tr>
+                        <tr>
+                            <td>영수증발행</td>
+                            <td>[[${product.receipt}]]</td>
+                        </tr>
+                        <tr>
+                            <td>사업자구분</td>
+                            <td>[[${product.bizType}]]</td>
+                        </tr>
+                        <tr>
+                            <td>브랜드</td>
+                            <td>[[${product.company}]]</td>
+                        </tr>
+                        <tr>
+                            <td>원산지</td>
+                            <td>[[${product.origin}]]</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td>제품소개</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>색상</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>치수</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>제조자/수입국</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>제조국</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>취급시 주의사항</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>제조연월</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>품질보증기준</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>A/S 책임자와 전화번호</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td>주문후 예상 배송기간</td>
+                            <td>상세정보 직접입력</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">구매, 교환, 반품, 배송, 설치 등과 관련하여 추가비용, 제한조건 등의 특이사항이 있는 경우</td>
+                        </tr>
+                    </table>
+                    <p class="noticeP">
+                        소비자가 전자상거래등에서 소비자 보호에 관한 법률 제 17조 제1항 또는 제3항에 따라 청약철회를 하고 동법 제 18조 제1항 에 따라 청약철회한 물품을 판매자에게 반환하였음에도 불구 하고 결제 대금의 환급이 3영업일을 넘게 지연된 경우, 소비자 는 전자상거래등에서 소비자보호에 관한 법률 제18조 제2항 및 동법 시행령 제21조 2에 따라 지연일수에 대하여 전상법 시행령으로 정하는 이율을 곱하여 산정한 지연이자(“지연배상금”)를 신청할 수 있습니다. 아울러, 교환∙반품∙보증 및 결제대금의 환급신청은 [나의쇼핑정보]에서 하실 수 있으며, 자세한 문의는 개별 판매자에게 연락하여 주시기 바랍니다.
+                    </p>
+                </article>
+                <article class="review">
+                    <nav>
+                        <h1>상품리뷰</h1>
+                    </nav>
+                    <ul>
+                        <li>
+                            <div>
+                                <h5 class="rating star4">상품평</h5>
+                                <span>seo******	2018-07-10</span>
+                            </div>
+                            <h3>상품명1/BLUE/L</h3>
+                            <p>
+                                
+                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                            
+                            </p>
+                        </li>
+                        <li>
+                            <div>
+                                <h5 class="rating star4">상품평</h5>
+                                <span>seo******	2018-07-10</span>
+                            </div>
+                            <h3>상품명1/BLUE/L</h3>
+                            <p>
+                                
+                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                            
+                            </p>
+                        </li>
+                        <li>
+                            <div>
+                                <h5 class="rating star4">상품평</h5>
+                                <span>seo******	2018-07-10</span>
+                            </div>
+                            <h3>상품명1/BLUE/L</h3>
+                            <p>
+                                
+                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                            
+                            </p>
+                        </li>
+                        <li>
+                            <div>
+                                <h5 class="rating star4">상품평</h5>
+                                <span>seo******	2018-07-10</span>
+                            </div>
+                            <h3>상품명1/BLUE/L</h3>
+                            <p>
+                                
+                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                            
+                            </p>
+                        </li>
+                        <li>
+                            <div>
+                                <h5 class="rating star4">상품평</h5>
+                                <span>seo******	2018-07-10</span>
+                            </div>
+                            <h3>상품명1/BLUE/L</h3>
+                            <p>
+                                
+                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
+                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
+                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
+                            
+                            </p>
+                        </li>
+                    </ul>
+                    <div class="paging">
+                        <span class="prev">
+                            <a href="#">&#60;이전</a>
+                        </span>
+                        <span class="num">
+                            <a href="#" class="on">1</a>
+                            <a href="#">2</a>
+                        </span>
+                        <span class="next">
+                            <a href="#">다음&#62;</a>
+                        </span>
+                    </div>
+                </article>
+            </section>
+        </main>
+<script>
+let num = parseInt(document.querySelector('input[name="num"]').value, 10);
+let disPrice = [[${product.disPrice}]];
+	
+function decrease(){
+	if(num > 1){
+		num -= 1;
+	}
+	document.querySelector('input[name="num"]').value = num;
+	document.querySelector('.total').children[0].textContent = (num * disPrice).toLocaleString();
+}
+
+function increase(){
+	num += 1;
+	document.querySelector('input[name="num"]').value = num;
+	document.querySelector('.total').children[0].textContent = (num * disPrice).toLocaleString();
+}
+
+function cart(){
+	// cart 테이블에 항목 담기(ajax)
+	
+	// 사용자가 원할 경우 카트 페이지로 이동
+	let response = confirm('상품이 장바구니에 담겼습니다\n장바구니로 이동하시겠습니까?')
+	if(response){
+		window.location.href = "/Kmarket2/product/cart";
+	}
+}
+
+function singlePurchase(){
+	window.location.href = "/Kmarket2/product/order?prodNo=" + [[${product.prodNo}]] + "&qty=" + num + "&disPrice=" + disPrice;
+}
+
+window.onload = () =>{
+	document.querySelector('.total').children[0].textContent = disPrice.toLocaleString();
+};
+</script>
+<th:block th:include="@{product/_footer.html}"/>
