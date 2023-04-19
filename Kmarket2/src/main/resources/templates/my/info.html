@@ -1,0 +1,137 @@
+<th:block th:include="@{my/_header.html}"/>
+<script>
+	$(function(){
+		$('#btnChangePass').on('click',function(){
+			$('#pwPopup').css('display','block');
+			
+			
+		});
+	});
+		
+	
+</script>
+            <div class="info">
+                <ul>
+                    <span class="menu_else"></span>
+                    <li th:classappend="${group} eq 'ordered'?'on':'off'">
+                        <a th:href="@{/my/ordered?group=ordered}">전체주문내역</a>
+                    </li>
+                    <li th:classappend="${group} eq 'point'?'on':'off'">
+                        <a th:href="@{/my/point?group=point}">포인트내역</a>
+                    </li>
+                    <li th:classappend="${group} eq 'coupon'?'on':'off'">
+                        <a th:href="@{/my/coupon?group=coupon}">쿠폰</a>
+                    </li>
+                    <li th:classappend="${group} eq 'review'?'on':'off'">
+                        <a th:href="@{/my/review?group=review}">나의리뷰</a>
+                    </li>
+                    <li th:classappend="${group} eq 'qna'?'on':'off'">
+                        <a th:href="@{/my/qna?group=qna}">문의하기</a>
+                    </li>
+                    <li th:classappend="${group} eq 'info'?'on':'off'">
+                        <a th:href="@{/my/info?group=info}">나의설정</a>
+                </ul>
+                <section>
+                    <a th:href="@{#}">
+                        <img th:src="@{/img/my_banner2.png}" alt="실적/한도 제한없는 스마일 카드 적립 혜택" class="banner">
+                    </a>
+                    <article>
+                        <h3>회원정보 설정</h3>
+                        <table border="0">
+                            <tr>
+                                <td>사용자 ID</td>
+                                <td th:text=${user.uid}></td>
+                            </tr>
+                            <tr>
+                                <td>비밀번호</td>
+                                <td>
+                                    <button id="btnChangePass" style="cursor: pointer">비밀번호 수정</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>이름</td>
+                                <td>[[${user.name}]]</td>
+                            </tr>
+                            <tr>
+                                <td>가입날</td>
+                                <td>[[${user.rdate.substring(2, 10)}]]</td>
+                            </tr>
+                            <tr>
+                                <td>E-mail</td>
+                                <td>
+                                    <input type="text" name="email1" th:value="${user.email.substring(0, user.email.indexOf('@'))}">
+                                    @
+                                    <input type="text" name="email2" th:value="${user.email.substring(user.email.indexOf('@')+1, user.email.length)}">
+                                    <select>
+                                        <option>직접입력</option>
+                                        <option>naver.com</option>
+                                        <option>daum.net</option>
+                                        <option>gmail.com</option>
+                                        <option>nate.com</option>
+                                        <option>outlook.com</option>
+                                    </select>
+                                    <button id="btnChangeEmail" style="cursor: pointer">수정하기</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>휴대폰</td>
+                                <td>
+                                    <p class="hp">
+                                        <input type="text" name="hp1" value="010">
+                                        -
+                                        <input type="text" name="hp2" value="1234">
+                                        -
+                                        <input type="text" name="hp3" value="1001">
+                                        <button id="btnChangeEmail" style="cursor: pointer">수정하기</button>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>주소</td>
+                                <td>
+                                    <input type="text" name="zip">
+                                    <button id="btnFindZip" style="cursor: pointer">주소검색</button>
+                                    <p class="address">
+                                        <input type="text" name="addr1">
+                                        <input type="text" name="addr2">
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>회원탈퇴</td>
+                                <td>
+                                    <button id="btnWithdraw">탈퇴하기</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <button id="btnInfoChange" style="cursor: pointer">수정하기</button>
+                    </article>
+                </section>
+            </div>
+        </div>
+<th:block th:include="@{my/_footer.html}"/>
+		<div id="pwPopup" class="popup">
+			<div>
+				<h4>비밀번호 수정</h4>
+				<form action="#">
+					<table>
+						<tr>
+							<td>아이디</td>
+							<td th:text=${user.uid}></td>
+						</tr>
+						<tr>
+							<td>새비밀번호</td>
+							<td><input type="text" class="pw1" name="pass1" placeholder="새 비밀번호 입력"></td>
+						</tr>
+						<tr>
+							<td>새비밀번호 확인</td>
+							<td><input type="text" class="pw2" name="pass2" placeholder="새 비밀번호 확인 입력"></td>
+						</tr>
+					</table>
+					<div class="btnSubmit">
+						<input type="submit" value="수정" name="submit">
+					</div>
+				</form>
+			</div>
+		</div>
+   
